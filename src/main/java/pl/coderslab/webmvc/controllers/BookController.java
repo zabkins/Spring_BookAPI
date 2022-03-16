@@ -1,19 +1,44 @@
 package pl.coderslab.webmvc.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.webmvc.model.Book;
+import pl.coderslab.webmvc.service.BookService;
+
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
+    private BookService bookService;
 
-    @RequestMapping("/helloBook")
-    public Book helloBook() {
-        return new Book(1L, "9788324631766", "Thinking in Java",
-                "Bruce Eckel", "Helion", "programming");
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @GetMapping("")
+    public List<Book> getBooks(){
+        return bookService.getBooks();
+    }
+
+    @PostMapping("")
+    public void addBook(@RequestBody Book book){
+        bookService.add(book);
+    }
+
+    @GetMapping("/{id}")
+    public Book getBook(@PathVariable Long id){
+        return bookService.get(id); //.. tu bedzie Optional i po get(id).orElseThrow i blad ;
+    }
+
+    @PutMapping("")
+    public void update(@RequestBody Book book){
+        bookService.update(book);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        bookService.delete(id);
     }
 
 }
