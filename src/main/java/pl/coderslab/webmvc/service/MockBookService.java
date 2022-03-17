@@ -43,7 +43,13 @@ public class MockBookService implements BookService{
 
     @Override
     public void update(Book book) {
-
+        Optional<Book> foundBook = books.stream()
+                .filter(b -> b.getId().longValue() == book.getId().longValue())
+                .findFirst();
+        if(foundBook.isPresent()){
+            int index = this.books.indexOf(foundBook.get());
+            books.set(index,book);
+        }
     }
 
     @Override
