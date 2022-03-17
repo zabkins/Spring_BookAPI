@@ -5,6 +5,7 @@ import pl.coderslab.webmvc.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MockBookService implements BookService{
@@ -31,8 +32,11 @@ public class MockBookService implements BookService{
     }
 
     @Override
-    public Book get(Long id) {
-        return null;
+    public Optional<Book> get(Long id) {
+        Optional<Book> foundBook = books.stream()
+                .filter(b -> b.getId().longValue() == id.longValue())
+                .findFirst();
+        return foundBook;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package pl.coderslab.webmvc.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.webmvc.model.Book;
 import pl.coderslab.webmvc.service.BookService;
 
@@ -28,7 +30,7 @@ public class BookController {
 
     @GetMapping("/{id}")
     public Book getBook(@PathVariable Long id){
-        return bookService.get(id); //.. tu bedzie Optional i po get(id).orElseThrow i blad ;
+        return bookService.get(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Book not found"));
     }
 
     @PutMapping("")
