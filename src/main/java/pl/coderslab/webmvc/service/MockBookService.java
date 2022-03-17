@@ -46,6 +46,6 @@ public class MockBookService implements BookService{
 
     @Override
     public void delete(Long id) {
-
+        books.removeIf(b -> b.getId().longValue() == id.longValue());
     }
 }
