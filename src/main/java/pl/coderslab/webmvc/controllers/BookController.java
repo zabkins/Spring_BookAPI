@@ -19,27 +19,27 @@ public class BookController {
     }
 
     @GetMapping("")
-    public List<Book> getBooks(){
+    public List<Book> getBooks() {
         return bookService.getBooks();
     }
 
     @PostMapping("")
-    public void addBook(@RequestBody Book book){
+    public void addBook(@RequestBody Book book) {
         bookService.add(book);
     }
 
     @GetMapping("/{id}")
-    public Book getBook(@PathVariable Long id){
-        return bookService.get(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Book not found"));
+    public Book getBook(@PathVariable Long id) {
+        return bookService.get(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found"));
     }
 
     @PutMapping("")
-    public void update(@RequestBody Book book){
+    public void update(@RequestBody Book book) {
         bookService.update(book);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         bookService.delete(id);
     }
 

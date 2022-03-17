@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class MockBookService implements BookService{
+public class MockBookService implements BookService {
     private List<Book> books;
     private static Long nextID = 4L;
 
@@ -46,9 +46,9 @@ public class MockBookService implements BookService{
         Optional<Book> foundBook = books.stream()
                 .filter(b -> b.getId().longValue() == book.getId().longValue())
                 .findFirst();
-        if(foundBook.isPresent()){
+        if (foundBook.isPresent()) {
             int index = this.books.indexOf(foundBook.get());
-            books.set(index,book);
+            books.set(index, book);
         }
     }
 
