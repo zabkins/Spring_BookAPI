@@ -10,7 +10,7 @@ import java.util.Optional;
 @Component
 public class MockBookService implements BookService{
     private List<Book> books;
-    private static Long nextID;
+    private static Long nextID = 4L;
 
     public MockBookService() {
         this.books = new ArrayList<>();
@@ -28,7 +28,9 @@ public class MockBookService implements BookService{
 
     @Override
     public void add(Book book) {
-
+        book.setId(nextID);
+        this.books.add(book);
+        nextID++;
     }
 
     @Override
