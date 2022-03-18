@@ -31,7 +31,7 @@
       <hr class="sidebar-divider my-0">
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a id="listBooks" class="nav-link" href="${pageContext.request.contextPath}/home">
+        <a class="nav-link" href="${pageContext.request.contextPath}/home">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>List of all books</span></a>
       </li>
@@ -69,42 +69,33 @@
           <!-- Content Row -->
           <div class="row">
             <div class="card"  style="width: 100%">
-              <h5 class="card-header text-primary">All Books:</h5>
-              <div id="booksDiv" class="card-body" style="width: 100%">
-<%--                  <div class="container-fluid">--%>
-<%--                    <div class="row no-gutters" style="width: 100%">--%>
-<%--                      <div class="col-1 px-3">ID</div>--%>
-<%--                      <div class="col-2 px-3">ISBN</div>--%>
-<%--                      <div class="col-2 px-3">Title</div>--%>
-<%--                      <div class="col-2 px-3">Author</div>--%>
-<%--                      <div class="col-1 px-3">Publisher</div>--%>
-<%--                      <div class="col-1 px-3">Type</div>--%>
-<%--                    </div>--%>
-<%--                  </div>--%>
-<%--                <hr class="sidebar-divider my-1">--%>
-<%--                  <c:forEach items="${books}" var="book">--%>
-<%--                    <div class="container-fluid">--%>
-<%--                      <div class="row no-gutters" style="width: 100%">--%>
-<%--                        <div class="col-1 px-3"><c:out value="${book.id}"/></div>--%>
-<%--                        <div class="col-2 px-3"><c:out value="${book.isbn}"/></div>--%>
-<%--                        <div class="col-2 px-3"><c:out value="${book.title}"/></div>--%>
-<%--                        <div class="col-2 px-3"><c:out value="${book.author}"/></div>--%>
-<%--                        <div class="col-1 px-3"><c:out value="${book.publisher}"/></div>--%>
-<%--                        <div class="col-1 px-3"><c:out value="${book.type}"/></div>--%>
-<%--                        <div class="row no-gutters">--%>
-<%--                          <div class="col px-3 text-primary">--%>
-<%--                            <a href="${pageContext.request.contextPath}/home/delete/${book.id}">Usuń</a>--%>
-<%--                          </div>--%>
-<%--                          <div class="col px-3 text-primary">--%>
-<%--                            <a href="${pageContext.request.contextPath}/home/update/${book.id}">Edytuj</a>--%>
-<%--                          </div>--%>
-<%--                          <div class="col px-3 text-primary">--%>
-<%--                              <a href="${pageContext.request.contextPath}/home/get/${user.id}"> Pokaż</a>--%>
-<%--                          </div>--%>
-<%--                        </div>--%>
-<%--                      </div>--%>
-<%--                    </div>--%>
-<%--                  </c:forEach>--%>
+              <h5 class="card-header text-primary">Add Book</h5>
+              <div class="card-body">
+                <form id="addForm" action="${pageContext.request.contextPath}/books" method="POST">
+                  <div class="form-group">
+                    <label for="isbn">ISBN</label>
+                    <input type="text" id="isbn" class="form-control" placeholder="isbn" name="isbn">
+                  </div>
+                  <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" class="form-control" placeholder="title" name="title">
+                  </div>
+                  <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" class="form-control" name="author">
+                  </div>
+                  <div class="form-group">
+                    <label for="publisher">Publisher</label>
+                    <input type="text" id="publisher" class="form-control" name="publisher">
+                  </div>
+                  <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" id="type" class="form-control" name="type">
+                  </div>
+                  <div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -174,9 +165,8 @@
   <!-- Page level custom scripts -->
   <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-area-demo.js"/>"></script>
   <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-pie-demo.js"/>"></script>
-
-  <script src="<c:url value="${pageContext.request.contextPath}/theme/js/script.js"/>"></script>
-
+  <!-- Add form JS -->
+  <script src="<c:url value="${pageContext.request.contextPath}/theme/js/addForm.js"/>"></script>
 </body>
 
 </html>

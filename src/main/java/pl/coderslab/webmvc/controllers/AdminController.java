@@ -1,15 +1,8 @@
 package pl.coderslab.webmvc.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.webmvc.model.Book;
 import pl.coderslab.webmvc.service.BookService;
-
-import java.util.List;
-
-//I know it's not build the way it should be but it's just for testing purposes - this controller makes BookController practically useless ...
 
 @Controller
 @RequestMapping("/home")
@@ -21,14 +14,16 @@ public class AdminController {
     }
 
     @RequestMapping("")
-    public String home(Model model){
-        List<Book> books = bookService.getBooks();
-        model.addAttribute("books",books);
+    public String home(){
         return "/home";
     }
 
-    @GetMapping("/add")
+    @RequestMapping("/add")
     public String add(){
         return "/addBook";
     }
+
+    //EDIT() - two possibilites :
+    // 1- use only js. create dynamic site with form based on data downloaded for book.id - i think it would be a better solution
+    // 2- use jsp view for form - add book object as attribute in order to fill existing data
 }
