@@ -71,6 +71,7 @@
             <div class="card"  style="width: 100%">
               <h5 class="card-header text-primary">Add Book</h5>
               <div class="card-body">
+
                 <form id="addForm" action="${pageContext.request.contextPath}/books" method="POST">
                   <div class="form-group">
                     <label for="isbn">ISBN</label>
@@ -96,6 +97,7 @@
                     <button type="submit" class="btn btn-primary">Add</button>
                   </div>
                 </form>
+
               </div>
             </div>
           </div>

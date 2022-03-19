@@ -69,7 +69,7 @@
           <!-- Content Row -->
           <div class="row">
             <div class="card"  style="width: 100%">
-              <h5 class="card-header text-primary">All Books:</h5>
+              <h5 id="contentHeader" class="card-header text-primary">All Books:</h5>
               <div id="booksDiv" class="card-body" style="width: 100%">
 <%--                  <div class="container-fluid">--%>
 <%--                    <div class="row no-gutters" style="width: 100%">--%>
@@ -175,7 +175,7 @@
   <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-area-demo.js"/>"></script>
   <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-pie-demo.js"/>"></script>
 
-  <script src="<c:url value="${pageContext.request.contextPath}/theme/js/script.js"/>"></script>
+  <script src="<c:url value="${pageContext.request.contextPath}/theme/js/homepage.js"/>"></script>
 
 </body>
 
