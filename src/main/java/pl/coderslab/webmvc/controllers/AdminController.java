@@ -23,7 +23,4 @@ public class AdminController {
         return "/addBook";
     }
 
-    //EDIT() - two possibilites :
-    // 1- use only js. create dynamic site with form based on data downloaded for book.id - i think it would be a better solution
-    // 2- use jsp view for form - add book object as attribute in order to fill existing data
 }

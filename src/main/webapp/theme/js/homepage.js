@@ -14,6 +14,18 @@ function apiListBooks(){
     })
 }
 
+function apiGetBook(id){
+    const resource = `/${id}`;
+    return fetch(apihost+resource,{
+        method: 'GET'
+    }).then(function (resp){
+        if(!resp.ok){
+            alert("Something went wrong")
+        }
+        return resp.json();
+    })
+}
+
 function apiDeleteBook(id){
     let resource = `/${id}`;
     fetch(apihost+resource,{
@@ -148,7 +160,8 @@ function createBookDiv(book){
     //
     //
     // EDIT, SHOW, DELETE BUTTONS
-    // let editShowDeleteDiv = document.createElement("div"); - NOT USED - EXPLAINED BELOW
+    // let editShowDeleteDiv = document.createElement("div"); - NOT USED - I tried making it as separate div in a function
+    // but I don't know how to reach parent element high enough, to delete whole bookDiv when delete is clicked.
 
     //DELETE DIV
     let deleteDiv = document.createElement("div");
@@ -197,15 +210,23 @@ function createBookDiv(book){
         event.preventDefault();
         contentHeader.innerText = "Edit book:";
         booksDiv.innerHTML = ""
-        booksDiv.appendChild(renderEditForm(book));
+        booksDiv.appendChild(createEditForm(book));
         //apiEditBook
     })
 
     //
     showA.addEventListener("click",function (event){
         event.preventDefault();
-        console.log("noted click")
-        //apiShowBook
+        contentHeader.innerText = "Book details:";
+        booksDiv.innerHTML = ""
+        apiGetBook(book.id)
+            .then(function (response){
+                const book = response;
+                booksDiv.appendChild(createSpecificBookView(book))
+            })
+            .catch(function (error){
+                console.warn(error);
+            });
     })
 
     //
@@ -221,7 +242,7 @@ function createBookDiv(book){
     return bookDiv;
 }
 
-function renderEditForm(book){
+function createEditForm(book){
     //Edit form
     let editForm = document.createElement("form");
 
@@ -341,64 +362,97 @@ function renderEditForm(book){
     return editForm;
 }
 
+function createSpecificBookView(book){
+    let specificBookDiv = document.createElement("div");
+    specificBookDiv.className = "container-fluid";
+    //
+    //DIVIDER
+    let smallDivider = document.createElement("div")
+    smallDivider.className = "divider my-2";
+    //
+    //ID div
+    let idOuterDiv = document.createElement("div");
+    idOuterDiv.className = "row no-gutters";
+    let idLabelDiv = document.createElement("div");
+    idLabelDiv.className = "col px-2";
+    idLabelDiv.innerText = "ID";
+    let idValueDiv = document.createElement("div");
+    idValueDiv.className = "col px-2";
+    idValueDiv.innerText = book.id;
+    idOuterDiv.appendChild(idLabelDiv);
+    idOuterDiv.appendChild(idValueDiv);
+    //
+    //ISBN div
+    let isbnOuterDiv = document.createElement("div");
+    isbnOuterDiv.className = "row no-gutters";
+    let isbnLabelDiv = document.createElement("div");
+    isbnLabelDiv.className = "col px-2";
+    isbnLabelDiv.innerText = "ISBN";
+    let isbnValueDiv = document.createElement("div");
+    isbnValueDiv.className = "col px-2";
+    isbnValueDiv.innerText = book.isbn;
+    isbnOuterDiv.appendChild(isbnLabelDiv);
+    isbnOuterDiv.appendChild(isbnValueDiv);
+    //
+    //Title DIV
+    let titleOuterDiv = document.createElement("div");
+    titleOuterDiv.className = "row no-gutters";
+    let titleLabelDiv = document.createElement("div");
+    titleLabelDiv.className = "col px-2";
+    titleLabelDiv.innerText = "Title";
+    let titleValueDiv = document.createElement("div");
+    titleValueDiv.className = "col px-2";
+    titleValueDiv.innerText = book.title;
+    titleOuterDiv.appendChild(titleLabelDiv);
+    titleOuterDiv.appendChild(titleValueDiv);
+    //
+    //Author DIV
+    let authorOuterDiv = document.createElement("div");
+    authorOuterDiv.className = "row no-gutters";
+    let authorLabelDiv = document.createElement("div");
+    authorLabelDiv.className = "col px-2";
+    authorLabelDiv.innerText = "Author";
+    let authorValueDiv = document.createElement("div");
+    authorValueDiv.className = "col px-2";
+    authorValueDiv.innerText = book.author;
+    authorOuterDiv.appendChild(authorLabelDiv);
+    authorOuterDiv.appendChild(authorValueDiv);
+    //
+    //Publisher DIV
+    let publisherOuterDiv = document.createElement("div");
+    publisherOuterDiv.className = "row no-gutters";
+    let publisherLabelDiv = document.createElement("div");
+    publisherLabelDiv.className = "col px-2";
+    publisherLabelDiv.innerText = "Publisher";
+    let publisherValueDiv = document.createElement("div");
+    publisherValueDiv.className = "col px-2";
+    publisherValueDiv.innerText = book.publisher;
+    publisherOuterDiv.appendChild(publisherLabelDiv);
+    publisherOuterDiv.appendChild(publisherValueDiv);
+    //
+    //Type DIV
+    let typeOuterDiv = document.createElement("div");
+    typeOuterDiv.className = "row no-gutters";
+    let typeLabelDiv = document.createElement("div");
+    typeLabelDiv.className = "col px-2";
+    typeLabelDiv.innerText = "Type";
+    let typeValueDiv = document.createElement("div");
+    typeValueDiv.className = "col px-2";
+    typeValueDiv.innerText = book.type;
+    typeOuterDiv.appendChild(typeLabelDiv);
+    typeOuterDiv.appendChild(typeValueDiv);
+    //
 
-//NOT USED BECAUSE I DONT KNOW HOW TO DELETE WHOLE BOOK DIV FROM inside of this function :)
-// function createEditShowDelete(book){
-//     let mainDiv = document.createElement("div");
-//     mainDiv.className = "row no-gutters";
-//
-//     let deleteDiv = document.createElement("div");
-//     deleteDiv.className = "col px-1 text-primary";
-//     let deleteA = document.createElement("a");
-//     deleteA.href = `http://localhost:8080/books/${book.id}`
-//     deleteA.id = "deleteA";
-//     deleteA.innerText = "Delete book";
-//     deleteDiv.appendChild(deleteA);
-//
-//     let editDiv = document.createElement("div");
-//     editDiv.className = "col px-1 text-primary";
-//     let editA = document.createElement("a");
-//     editA.href = `http://localhost:8080/books/${book.id}`
-//     editA.id = "editA";
-//     editA.innerText = "Edit book";
-//     editDiv.appendChild(editA);
-//
-//     let showDiv = document.createElement("div");
-//     showDiv.className = "col px-1 text-primary";
-//     let showA = document.createElement("a");
-//     showA.href = `http://localhost:8080/books/${book.id}`
-//     showA.id = "showA";
-//     showA.innerText = "Show book";
-//     showDiv.appendChild(showA);
-//
-//     mainDiv.appendChild(deleteDiv);
-//     mainDiv.appendChild(editDiv);
-//     mainDiv.appendChild(showDiv);
-//
-//     deleteA.addEventListener("click",function (event){
-//         event.preventDefault();
-//         //apiDeleteBook
-//         apiDeleteBook(book.id)
-//             .then(function (response){
-//             })
-//             .catch(function (error){
-//                 console.warn(error);
-//             })
-//     })
-//     editA.addEventListener("click",function (event){
-//         event.preventDefault();
-//         console.log("noted click")
-//
-//         //apiEditBook
-//     })
-//     showA.addEventListener("click",function (event){
-//         event.preventDefault();
-//         console.log("noted click")
-//         //apiShowBook
-//     })
-// }
-//NOT USED BECAUSE I DONT KNOW HOW TO DELETE WHOLE BOOK DIV FROM inside of this function :)
+    //
+    specificBookDiv.appendChild(idOuterDiv);
+    specificBookDiv.appendChild(isbnOuterDiv);
+    specificBookDiv.appendChild(titleOuterDiv);
+    specificBookDiv.appendChild(authorOuterDiv);
+    specificBookDiv.appendChild(publisherOuterDiv);
+    specificBookDiv.appendChild(typeOuterDiv);
 
+    return specificBookDiv;
+}
 
 function listBooks(){
     contentHeader.innerText = "All Books:";
