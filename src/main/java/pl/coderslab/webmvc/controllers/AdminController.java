@@ -18,9 +18,4 @@ public class AdminController {
         return "/home";
     }
 
-    @RequestMapping("/add")
-    public String add(){
-        return "/addBook";
-    }
-
 }

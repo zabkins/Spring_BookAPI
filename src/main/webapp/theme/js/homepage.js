@@ -1,6 +1,7 @@
 const apihost = "http://localhost:8080/books";
 let booksDiv = document.getElementById("booksDiv");
 let listBooksButton = document.getElementById("listBooks");
+let addBookButton = document.getElementById("addBookButton");
 let contentHeader = document.getElementById("contentHeader");
 
 function apiListBooks(){
@@ -21,6 +22,21 @@ function apiGetBook(id){
     }).then(function (resp){
         if(!resp.ok){
             alert("Something went wrong")
+        }
+        return resp.json();
+    })
+}
+
+function apiAddBook(isbn, title, author, publisher, type){
+    fetch(apihost,{
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({isbn: isbn, title: title, author: author, publisher: publisher, type: type}),
+        method: 'POST'
+    }).then(function (resp){
+        if(!resp.ok){
+            alert("Something went wrong! Book not added");
         }
         return resp.json();
     })
@@ -251,6 +267,7 @@ function createEditForm(book){
     isbnDiv.className = "form-group";
     let isbnLabel = document.createElement("label");
     isbnLabel.setAttribute("for","isbn");
+    isbnLabel.innerText = "ISBN"
     let isbnInput = document.createElement("input");
     isbnInput.type = "text";
     isbnInput.id = "isbn";
@@ -265,6 +282,7 @@ function createEditForm(book){
     isbnDiv.className = "form-group";
     let titleLabel = document.createElement("label");
     titleLabel.setAttribute("for","title");
+    titleLabel.innerText = "Title"
     let titleInput = document.createElement("input");
     titleInput.type = "text";
     titleInput.id = "title";
@@ -279,6 +297,7 @@ function createEditForm(book){
     authorDiv.className = "form-group";
     let authorLabel = document.createElement("label");
     authorLabel.setAttribute("for","author");
+    authorLabel.innerText = "Author"
     let authorInput = document.createElement("input");
     authorInput.type = "text";
     authorInput.id = "author";
@@ -293,6 +312,7 @@ function createEditForm(book){
     publisherDiv.className = "form-group";
     let publisherLabel = document.createElement("label");
     publisherLabel.setAttribute("for","publisher");
+    publisherLabel.innerText = "Publisher"
     let publisherInput = document.createElement("input");
     publisherInput.type = "text";
     publisherInput.id = "publisher";
@@ -307,6 +327,7 @@ function createEditForm(book){
     typeDiv.className = "form-group";
     let typeLabel = document.createElement("label");
     typeLabel.setAttribute("for","type");
+    typeLabel.innerText = "Type"
     let typeInput = document.createElement("input");
     typeInput.type = "text";
     typeInput.id = "type";
@@ -360,6 +381,115 @@ function createEditForm(book){
     })
 
     return editForm;
+}
+
+function createAddForm(){
+    //Add Form
+    let addForm = document.createElement("form");
+
+    //isbnDIV
+    let isbnDiv = document.createElement("div");
+    isbnDiv.className = "form-group";
+    let isbnLabel = document.createElement("label");
+    isbnLabel.setAttribute("for","isbn");
+    isbnLabel.innerText = "ISBN";
+    let isbnInput = document.createElement("input");
+    isbnInput.type = "text";
+    isbnInput.id = "isbn";
+    isbnInput.className = "form-control";
+    isbnInput.placeholder = "ISBN";
+    isbnInput.name = "isbn";
+    isbnDiv.appendChild(isbnLabel);
+    isbnDiv.appendChild(isbnInput);
+    //
+    //titleDIV
+    let titleDiv = document.createElement("div");
+    isbnDiv.className = "form-group";
+    let titleLabel = document.createElement("label");
+    titleLabel.setAttribute("for","title");
+    titleLabel.innerText = "Title"
+    let titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.id = "title";
+    titleInput.className = "form-control";
+    titleInput.placeholder = "Title";
+    titleInput.name = "title";
+    titleDiv.appendChild(titleLabel);
+    titleDiv.appendChild(titleInput);
+    //
+    //Author Div
+    let authorDiv = document.createElement("div");
+    authorDiv.className = "form-group";
+    let authorLabel = document.createElement("label");
+    authorLabel.setAttribute("for","author");
+    authorLabel.innerText = "Author"
+    let authorInput = document.createElement("input");
+    authorInput.type = "text";
+    authorInput.id = "author";
+    authorInput.className = "form-control";
+    authorInput.placeholder = "Author";
+    authorInput.name = "author";
+    authorDiv.appendChild(authorLabel);
+    authorDiv.appendChild(authorInput);
+    //
+    //Publisher Div
+    let publisherDiv = document.createElement("div");
+    publisherDiv.className = "form-group";
+    let publisherLabel = document.createElement("label");
+    publisherLabel.setAttribute("for","publisher");
+    publisherLabel.innerText = "Publisher"
+    let publisherInput = document.createElement("input");
+    publisherInput.type = "text";
+    publisherInput.id = "publisher";
+    publisherInput.className = "form-control";
+    publisherInput.placeholder = "Publisher";
+    publisherInput.name = "publisher";
+    publisherDiv.appendChild(publisherLabel);
+    publisherDiv.appendChild(publisherInput);
+    //
+    //TypeDIV
+    let typeDiv = document.createElement("div");
+    typeDiv.className = "form-group";
+    let typeLabel = document.createElement("label");
+    typeLabel.setAttribute("for","type");
+    typeLabel.innerText = "Type"
+    let typeInput = document.createElement("input");
+    typeInput.type = "text";
+    typeInput.id = "type";
+    typeInput.className = "form-control";
+    typeInput.placeholder = "Type";
+    typeInput.name = "type";
+    typeDiv.appendChild(typeLabel);
+    typeDiv.appendChild(typeInput);
+    //
+    //Submit button
+    let buttonDiv = document.createElement("div");
+    let button = document.createElement("button");
+    button.type = "submit";
+    button.className = "btn btn-primary";
+    button.innerText = "Add Book";
+    buttonDiv.appendChild(button);
+    //
+
+    addForm.appendChild(isbnDiv);
+    addForm.appendChild(titleDiv);
+    addForm.appendChild(authorDiv);
+    addForm.appendChild(publisherDiv);
+    addForm.appendChild(typeDiv);
+    addForm.appendChild(buttonDiv);
+
+    addForm.addEventListener("submit",function (event){
+        event.preventDefault();
+        let isbn = addForm.isbn.value;
+        let title = addForm.title.value;
+        let author = addForm.author.value;
+        let publisher = addForm.publisher.value;
+        let type = addForm.type.value;
+        apiAddBook(isbn,title,author,publisher,type);
+        window.location.href = 'http://localhost:8080/home';
+    })
+
+    return addForm;
 }
 
 function createSpecificBookView(book){
@@ -475,6 +605,13 @@ document.addEventListener('DOMContentLoaded',function (){
     listBooksButton.addEventListener("click",function (event){
         event.preventDefault();
         listBooks();
+    })
+
+    addBookButton.addEventListener("click",function (event){
+        event.preventDefault();
+        contentHeader.innerText = "Add Book:";
+        booksDiv.innerHTML = ""
+        booksDiv.appendChild(createAddForm());
     })
 
 })
