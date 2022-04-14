@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -64,18 +63,35 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">BooksAPI Tester</h1>
                     <a id="addBookButton" href="${pageContext.request.contextPath}/admin/books" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                        <i class="fas fa-download fa-sm text-white-50"></i>All books</a>
+                        <i class="fas fa-download fa-sm text-white-50"></i>All Books</a>
                 </div>
 
                 <!-- Content Row -->
                 <div class="row">
                     <div class="card"  style="width: 100%">
-                        <h5 id="contentHeader" class="card-header text-primary">Edit Book:</h5>
+                        <h5 id="contentHeader" class="card-header text-primary">All Books:</h5>
                         <div id="booksDiv" class="card-body" style="width: 100%">
                             <div class="container-fluid">
-                                <jsp:include page="editForm.jsp"/>
+                                <div class="row no-gutters" style="width: 100%">
+                                    <div class="col-1 px-3">ID</div>
+                                    <div class="col-2 px-3">ISBN</div>
+                                    <div class="col-2 px-3">Title</div>
+                                    <div class="col-2 px-3">Author</div>
+                                    <div class="col-1 px-3">Publisher</div>
+                                    <div class="col-1 px-3">Type</div>
+                                </div>
                             </div>
                             <hr class="sidebar-divider my-1">
+                                <div class="container-fluid">
+                                    <div class="row no-gutters" style="width: 100%">
+                                        <div class="col-1 px-3"><c:out value="${chosenBook.id}"/></div>
+                                        <div class="col-2 px-3"><c:out value="${chosenBook.isbn}"/></div>
+                                        <div class="col-2 px-3"><c:out value="${chosenBook.title}"/></div>
+                                        <div class="col-2 px-3"><c:out value="${chosenBook.author}"/></div>
+                                        <div class="col-1 px-3"><c:out value="${chosenBook.publisher}"/></div>
+                                        <div class="col-1 px-3"><c:out value="${chosenBook.type}"/></div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -109,6 +125,7 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+
 <!-- Bootstrap core JavaScript-->
 <link href="<c:url value="${pageContext.request.contextPath}/theme/css/sb-admin-2.min.css"/>" rel="stylesheet">
 <script src="<c:url value="${pageContext.request.contextPath}/theme/vendor/jquery/jquery.min.js"/>"></script>
@@ -127,7 +144,7 @@
 <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-area-demo.js"/>"></script>
 <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-pie-demo.js"/>"></script>
 
-<%--<script src="<c:url value="${pageContext.request.contextPath}/theme/js/homepage.js"/>"></script>--%>
+<%--  <script src="<c:url value="${pageContext.request.contextPath}/theme/js/homepage.js"/>"></script>--%>
 
 </body>
 

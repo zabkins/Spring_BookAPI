@@ -70,10 +70,15 @@
                 <!-- Content Row -->
                 <div class="row">
                     <div class="card"  style="width: 100%">
-                        <h5 id="contentHeader" class="card-header text-primary">Edit Book:</h5>
+                        <h5 id="contentHeader" class="card-header text-primary">Are you sure you want to delete book ${bookToDelete.title}?:</h5>
                         <div id="booksDiv" class="card-body" style="width: 100%">
                             <div class="container-fluid">
-                                <jsp:include page="editForm.jsp"/>
+                                <form action="/admin/delete/${bookToDelete.id}" method="post">
+                                    <div>
+                                        <input type="submit" value="Confirm" class="btn btn-primary">
+                                        <a href="/admin/books" class="btn btn-primary">Cancel</a>
+                                    </div>
+                                </form>
                             </div>
                             <hr class="sidebar-divider my-1">
                         </div>
@@ -108,6 +113,7 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
 
 <!-- Bootstrap core JavaScript-->
 <link href="<c:url value="${pageContext.request.contextPath}/theme/css/sb-admin-2.min.css"/>" rel="stylesheet">
