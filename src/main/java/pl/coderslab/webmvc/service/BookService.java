@@ -1,6 +1,6 @@
 package pl.coderslab.webmvc.service;
 
-import pl.coderslab.webmvc.model.Book;
+import pl.coderslab.webmvc.entities.Book;
 
 import java.util.List;
 import java.util.Optional;

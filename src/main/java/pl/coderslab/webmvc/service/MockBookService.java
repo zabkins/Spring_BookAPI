@@ -1,7 +1,7 @@
 package pl.coderslab.webmvc.service;
 
 import org.springframework.stereotype.Component;
-import pl.coderslab.webmvc.model.Book;
+import pl.coderslab.webmvc.entities.Book;
 
 import java.util.ArrayList;
 import java.util.List;

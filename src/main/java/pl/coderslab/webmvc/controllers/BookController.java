@@ -3,7 +3,7 @@ package pl.coderslab.webmvc.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import pl.coderslab.webmvc.model.Book;
+import pl.coderslab.webmvc.entities.Book;
 import pl.coderslab.webmvc.service.BookService;
 
 import java.util.List;

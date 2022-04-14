@@ -1,12 +1,31 @@
-package pl.coderslab.webmvc.model;
+package pl.coderslab.webmvc.entities;
 
 
+import org.hibernate.validator.constraints.ISBN;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "books")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ISBN
     private String isbn;
+    @Size(min = 3, max = 200)
+    @NotBlank
     private String title;
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String author;
+    @NotBlank
+    @Size(max = 200)
     private String publisher;
+    @NotBlank
+    @Size(max = 100)
     private String type;
 
     public Book() {
