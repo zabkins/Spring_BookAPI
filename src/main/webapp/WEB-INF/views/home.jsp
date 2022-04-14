@@ -21,7 +21,7 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/home">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/books">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -31,7 +31,7 @@
       <hr class="sidebar-divider my-0">
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a id="listBooks" class="nav-link" href="${pageContext.request.contextPath}/home">
+        <a id="listBooks" class="nav-link" href="${pageContext.request.contextPath}/admin/books">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>List of all books</span></a>
       </li>
@@ -62,7 +62,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">BooksAPI Tester</h1>
-            <a id="addBookButton" href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <a id="addBookButton" href="${pageContext.request.contextPath}/admin/add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
               <i class="fas fa-download fa-sm text-white-50"></i>Add new book</a>
           </div>
 
@@ -71,40 +71,40 @@
             <div class="card"  style="width: 100%">
               <h5 id="contentHeader" class="card-header text-primary">All Books:</h5>
               <div id="booksDiv" class="card-body" style="width: 100%">
-<%--                  <div class="container-fluid">--%>
-<%--                    <div class="row no-gutters" style="width: 100%">--%>
-<%--                      <div class="col-1 px-3">ID</div>--%>
-<%--                      <div class="col-2 px-3">ISBN</div>--%>
-<%--                      <div class="col-2 px-3">Title</div>--%>
-<%--                      <div class="col-2 px-3">Author</div>--%>
-<%--                      <div class="col-1 px-3">Publisher</div>--%>
-<%--                      <div class="col-1 px-3">Type</div>--%>
-<%--                    </div>--%>
-<%--                  </div>--%>
-<%--                <hr class="sidebar-divider my-1">--%>
-<%--                  <c:forEach items="${books}" var="book">--%>
-<%--                    <div class="container-fluid">--%>
-<%--                      <div class="row no-gutters" style="width: 100%">--%>
-<%--                        <div class="col-1 px-3"><c:out value="${book.id}"/></div>--%>
-<%--                        <div class="col-2 px-3"><c:out value="${book.isbn}"/></div>--%>
-<%--                        <div class="col-2 px-3"><c:out value="${book.title}"/></div>--%>
-<%--                        <div class="col-2 px-3"><c:out value="${book.author}"/></div>--%>
-<%--                        <div class="col-1 px-3"><c:out value="${book.publisher}"/></div>--%>
-<%--                        <div class="col-1 px-3"><c:out value="${book.type}"/></div>--%>
-<%--                        <div class="row no-gutters">--%>
-<%--                          <div class="col px-3 text-primary">--%>
-<%--                            <a href="${pageContext.request.contextPath}/home/delete/${book.id}">Usuń</a>--%>
-<%--                          </div>--%>
-<%--                          <div class="col px-3 text-primary">--%>
-<%--                            <a href="${pageContext.request.contextPath}/home/update/${book.id}">Edytuj</a>--%>
-<%--                          </div>--%>
-<%--                          <div class="col px-3 text-primary">--%>
-<%--                              <a href="${pageContext.request.contextPath}/home/get/${user.id}"> Pokaż</a>--%>
-<%--                          </div>--%>
-<%--                        </div>--%>
-<%--                      </div>--%>
-<%--                    </div>--%>
-<%--                  </c:forEach>--%>
+                  <div class="container-fluid">
+                    <div class="row no-gutters" style="width: 100%">
+                      <div class="col-1 px-3">ID</div>
+                      <div class="col-2 px-3">ISBN</div>
+                      <div class="col-2 px-3">Title</div>
+                      <div class="col-2 px-3">Author</div>
+                      <div class="col-1 px-3">Publisher</div>
+                      <div class="col-1 px-3">Type</div>
+                    </div>
+                  </div>
+                <hr class="sidebar-divider my-1">
+                  <c:forEach items="${allBooks}" var="book">
+                    <div class="container-fluid">
+                      <div class="row no-gutters" style="width: 100%">
+                        <div class="col-1 px-3"><c:out value="${book.id}"/></div>
+                        <div class="col-2 px-3"><c:out value="${book.isbn}"/></div>
+                        <div class="col-2 px-3"><c:out value="${book.title}"/></div>
+                        <div class="col-2 px-3"><c:out value="${book.author}"/></div>
+                        <div class="col-1 px-3"><c:out value="${book.publisher}"/></div>
+                        <div class="col-1 px-3"><c:out value="${book.type}"/></div>
+                        <div class="row no-gutters">
+                          <div class="col px-3 text-primary">
+                            <a href="${pageContext.request.contextPath}/admin/delete/${book.id}">Delete</a>
+                          </div>
+                          <div class="col px-3 text-primary">
+                            <a href="${pageContext.request.contextPath}/admin/edit/${book.id}">Edit</a>
+                          </div>
+                          <div class="col px-3 text-primary">
+                              <a href="${pageContext.request.contextPath}/admin/get/${book.id}">Details</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </c:forEach>
               </div>
             </div>
           </div>
@@ -139,23 +139,23 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<%--  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+<%--    <div class="modal-dialog" role="document">--%>
+<%--      <div class="modal-content">--%>
+<%--        <div class="modal-header">--%>
+<%--          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>--%>
+<%--          <button class="close" type="button" data-dismiss="modal" aria-label="Close">--%>
+<%--            <span aria-hidden="true">×</span>--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>--%>
+<%--        <div class="modal-footer">--%>
+<%--          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>--%>
+<%--          <a class="btn btn-primary" href="login.html">Logout</a>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
+<%--  </div>--%>
 
   <!-- Bootstrap core JavaScript-->
   <link href="<c:url value="${pageContext.request.contextPath}/theme/css/sb-admin-2.min.css"/>" rel="stylesheet">
@@ -175,7 +175,7 @@
   <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-area-demo.js"/>"></script>
   <script src="<c:url value="${pageContext.request.contextPath}/theme/js/demo/chart-pie-demo.js"/>"></script>
 
-  <script src="<c:url value="${pageContext.request.contextPath}/theme/js/homepage.js"/>"></script>
+<%--  <script src="<c:url value="${pageContext.request.contextPath}/theme/js/homepage.js"/>"></script>--%>
 
 </body>
 
